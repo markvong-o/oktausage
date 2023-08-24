@@ -22,11 +22,15 @@ export async function POST(req: Request) {
     );
   }
 
-  let uniqueUsers = await getUniqueUsers(domain, apiKey, days);
-  let uniqueM2MTokens = await getM2MTokens(domain, apiKey, days);
-  return NextResponse.json({
-    num_of_unique_users: uniqueUsers,
-    num_of_m2m_tokens: uniqueM2MTokens,
-    num_of_days: days,
-  });
+  try {
+    let uniqueUsers = await getUniqueUsers(domain, apiKey, days);
+    let uniqueM2MTokens = await getM2MTokens(domain, apiKey, days);
+    return NextResponse.json({
+      num_of_unique_users: uniqueUsers,
+      num_of_m2m_tokens: uniqueM2MTokens,
+      num_of_days: days,
+    });
+  } catch (e) {
+    return NextResponse.json({ Error: e }, { status: 401 });
+  }
 }

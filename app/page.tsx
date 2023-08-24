@@ -53,6 +53,10 @@ export default function Home() {
       `${window.location.origin}/api/syslog`,
       getOptions
     );
+    if (res.status !== 200) {
+      alert(`${res.statusText}. Make sure your API Token is valid.`);
+      return;
+    }
     res = await res.json();
 
     setChartData(res);

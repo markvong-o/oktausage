@@ -19,6 +19,9 @@ export async function getLogData(
 
   let logs: any[] = [];
   let res: any | any[] = await fetch(url, getOptions);
+  if (res.status === 401) {
+    throw new Error(`${res.statusText}! Check your API Token`);
+  }
   let headers = res.headers;
   res = await res.json();
   logs.push(...res);
@@ -67,7 +70,12 @@ export async function getLogs(
 
   now.setDate(now.getDate() - (days || 30));
   let since = now.toISOString();
-  return await getLogData(domain, apiKey, since, filter, until);
+  try {
+    let logDataRes = await getLogData(domain, apiKey, since, filter, until);
+    return logDataRes;
+  } catch (e) {
+    throw e;
+  }
 }
 
 export async function getUniqueUsers(
@@ -76,22 +84,26 @@ export async function getUniqueUsers(
   days?: number
 ) {
   let filter: string = `eventType eq "app.oauth2.token.grant.id_token" and outcome.result eq "SUCCESS"`;
-  let logs: any[] = (await getLogs(
-    domain,
-    apiKey,
-    filter,
-    days
-  )) as unknown as any[];
+  try {
+    let logs: any[] = (await getLogs(
+      domain,
+      apiKey,
+      filter,
+      days
+    )) as unknown as any[];
 
-  let actorIds = logs
-    .map((log) => log.target)
-    .map((targets) => targets[0])
-    .map((target) => target.id);
+    let actorIds = logs
+      .map((log) => log.target)
+      .map((targets) => targets[0])
+      .map((target) => target.id);
 
-  let uniqueActorIds = actorIds.filter(
-    (ele, idx) => actorIds.indexOf(ele) === idx
-  );
-  return uniqueActorIds.length;
+    let uniqueActorIds = actorIds.filter(
+      (ele, idx) => actorIds.indexOf(ele) === idx
+    );
+    return uniqueActorIds.length;
+  } catch (e) {
+    throw e;
+  }
 }
 
 export async function getM2MTokens(
@@ -99,12 +111,16 @@ export async function getM2MTokens(
   apiKey: string,
   days?: number
 ) {
-  let filter: string = `eventType eq "app.oauth2.as.token.grant.access_token" and outcome.result eq "SUCCESS" and debugContext.debugData.grantType eq "client_credentials"`;
-  let logs: any[] = (await getLogs(
-    domain,
-    apiKey,
-    filter,
-    days
-  )) as unknown as any[];
-  return logs.length;
+  try {
+    let filter: string = `eventType eq "app.oauth2.as.token.grant.access_token" and outcome.result eq "SUCCESS" and debugContext.debugData.grantType eq "client_credentials"`;
+    let logs: any[] = (await getLogs(
+      domain,
+      apiKey,
+      filter,
+      days
+    )) as unknown as any[];
+    return logs.length;
+  } catch (e) {
+    throw e;
+  }
 }
