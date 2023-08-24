@@ -48,7 +48,6 @@ export default function Home() {
       },
       body: JSON.stringify(formData),
     };
-    console.log(window.location.origin);
     let res: any = await fetch(
       `${window.location.origin}/api/syslog`,
       getOptions

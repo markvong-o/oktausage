@@ -22,7 +22,6 @@ export async function getLogData(
   let logs: any[] = [];
   let res: any | any[] = await fetch(url, getOptions);
   if (res.status === 401) {
-    console.log(res);
     throw new Error(`${res.statusText}! Check your API Token`);
   }
   let headers = res.headers;
@@ -39,7 +38,6 @@ export async function getLogData(
     counter += 1;
 
     res = await fetch(nextLink!, getOptions);
-    // console.log(res);
     headers = res.headers;
     res = await res.json();
     if (res.length === 0) {
@@ -47,7 +45,6 @@ export async function getLogData(
     }
     rateLimitRemaining = parseInt(headers.get('x-rate-limit-remaining')!) || 0;
     if (rateLimitRemaining < 30) {
-      console.log('Pause after ', counter);
       await sleep(1500);
     }
     logs.push(...res);
@@ -59,7 +56,6 @@ export async function getLogData(
     }
     nextLink = parsedLinks?.next?.url;
   }
-  console.log('exit', logs.length);
   return logs;
 }
 
