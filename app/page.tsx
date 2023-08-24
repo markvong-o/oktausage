@@ -69,6 +69,26 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
       <h1 className={styles.title}>Okta Org Usage</h1>
+      <p className={styles.description}>
+        A tool built to help visualize usage for an Okta org, specifically
+        targeting the number of unique user logins and M2M tokens minted between
+        the last 30 - 90 days.{' '}
+        <span className={styles.boldText}>
+          <br />
+          <br />
+          Unfortunately this tool may timeout if there are more than 300k log
+          events.
+        </span>
+        <br />
+        <br />
+        <a
+          href="https://developer.okta.com/docs/reference/api/system-log/"
+          target="_blank"
+          className={styles.link}
+        >
+          More Info on our system log API to customize your own reporting.
+        </a>
+      </p>
       {chartData ? (
         <Charts chartData={chartData} />
       ) : (

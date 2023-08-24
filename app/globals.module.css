@@ -10,6 +10,18 @@
     margin-bottom: 25px;
 }
 
+.description {
+    width: 60%;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 21px;
+}
+
+.boldText {
+    font-weight: bolder;
+    color: red;
+}
+
 .form {
     display: flex;
     flex-direction: column;
@@ -30,4 +42,9 @@
 
 .submitButton {
     margin-top: 45px;
+}
+
+.link {
+    color: blue;
+    text-decoration: underline;
 }
