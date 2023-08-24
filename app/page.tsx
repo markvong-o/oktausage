@@ -54,7 +54,7 @@ export default function Home() {
       getOptions
     );
     if (res.status !== 200) {
-      alert(`${res.statusText}. Make sure your API Token is valid.`);
+      alert(`ERROR: Make sure your API Token is valid.`);
       return;
     }
     res = await res.json();
