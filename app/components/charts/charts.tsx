@@ -149,7 +149,7 @@ export default function Charts({ chartData }: IData) {
       <p className={styles.text}>
         # M2M Tokens over {num_of_days} days: {chartData.num_of_m2m_tokens}
       </p>
-      <button onClick={refresh}>Refresh</button>
+      <button onClick={refresh} className={styles.refreshButton}>Refresh</button>
       <Bar
         options={userOptions}
         data={userData}

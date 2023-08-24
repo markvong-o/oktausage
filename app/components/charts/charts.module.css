@@ -19,3 +19,15 @@
 .text {
     font-size: 23px;
 }
+
+.refreshButton {
+    border: 1px white solid;
+    width: fit-content;
+    align-self: center;
+    padding: 10px;
+}
+
+.refreshButton:hover {
+    background-color: white;
+    color: black;
+}

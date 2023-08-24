@@ -5,10 +5,8 @@ import Charts from './components/charts/charts';
 import styles from './globals.module.css';
 
 export default function Home() {
-  const [domain, setDomain] = useState('thecrownlands.okta.com');
-  const [apiKey, setApiKey] = useState(
-    '00Liyvkc9y4XIeNJFbWGHGZT4IuG4AvhHh78imbXgI'
-  );
+  const [domain, setDomain] = useState('');
+  const [apiKey, setApiKey] = useState('');
   const [days, setDays] = useState<number>(30);
   interface IChartData {
     num_of_unique_users: number;
@@ -48,7 +46,7 @@ export default function Home() {
             <input
               name="domain"
               id="domain"
-              placeholder="Okta Domain"
+              placeholder="Ex: company.okta.com"
               defaultValue={domain}
               onChange={(e) => setDomain(e.target.value)}
             ></input>
