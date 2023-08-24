@@ -60,7 +60,7 @@ export default function Home() {
 
   const clearInput = () => {
     window.localStorage.clear();
-    window.location.href = "/";
+    window.location.href = '/';
   };
 
   return (
@@ -69,7 +69,7 @@ export default function Home() {
       {chartData ? (
         <Charts chartData={chartData} />
       ) : (
-        <form onSubmit={(e) => getSysLog(e)} className="form" id="form">
+        <form onSubmit={(e) => getSysLog(e)} className={styles.form} id="form">
           <div className={styles.formField}>
             <label htmlFor="domain">Okta Domain</label>
             <input
@@ -106,7 +106,11 @@ export default function Home() {
               required
             ></input>
           </div>
-          <input type="submit" name="Submit" className={styles.button} />
+          <input
+            type="submit"
+            name="Submit"
+            className={`${styles.button} ${styles.submitButton}`}
+          />
           <input
             type="button"
             name="Clear"

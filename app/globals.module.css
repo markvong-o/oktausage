@@ -7,7 +7,14 @@
 .title {
     font-size: 37px;
     font-weight: bolder;
-    margin-bottom: 45px;
+    margin-bottom: 25px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+
 }
 
 .button {
@@ -19,4 +26,8 @@
     cursor: pointer;
     color: black;
     background-color: white;
+}
+
+.submitButton {
+    margin-top: 45px;
 }
