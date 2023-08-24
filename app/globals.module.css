@@ -29,16 +29,19 @@
 
 }
 
-.button {
-    color: white;
-    border: 1px white solid;
+@media (prefers-color-scheme: dark) {
+    .button {
+        color: white;
+        border: 1px white solid;
+    }
+
+    .button:hover {
+        cursor: pointer;
+        color: black;
+        background-color: white;
+    }
 }
 
-.button:hover {
-    cursor: pointer;
-    color: black;
-    background-color: white;
-}
 
 .submitButton {
     margin-top: 45px;
@@ -47,4 +50,15 @@
 .link {
     color: blue;
     text-decoration: underline;
+}
+
+.button {
+    color: black;
+    border: 1px black solid;
+}
+
+.button:hover {
+    cursor: pointer;
+    color: white;
+    background-color: black;
 }

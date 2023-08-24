@@ -134,7 +134,7 @@ export default function Charts({ chartData }: IData) {
       {
         label: `M2M Tokens`,
         data: m2mLabelData,
-        backgroundColor: 'rgba(255, 255, 255, 1)',
+        backgroundColor: 'rgba(255, 155, 255, 1)',
       },
     ],
   };
