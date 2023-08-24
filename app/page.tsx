@@ -5,9 +5,9 @@ import Charts from './components/charts/charts';
 import styles from './globals.module.css';
 
 export default function Home() {
-  const [domain, setDomain] = useState('');
-  const [apiKey, setApiKey] = useState('');
-  const [days, setDays] = useState<number>(30);
+  const [domain, setDomain] = useState('' || localStorage['domain']);
+  const [apiKey, setApiKey] = useState('' || localStorage['apiKey']);
+  const [days, setDays] = useState<number>(30 || localStorage['days']);
   interface IChartData {
     num_of_unique_users: number;
     num_of_m2m_tokens: number;
@@ -15,6 +15,9 @@ export default function Home() {
   }
   const [chartData, setChartData] = useState<IChartData | null>(null);
   async function getSysLog(e: any) {
+    localStorage['domain'] = domain;
+    localStorage['apiKey'] = apiKey;
+    localStorage['days'] = days;
     e.preventDefault();
     let formData = {
       domain,
@@ -29,7 +32,10 @@ export default function Home() {
       },
       body: JSON.stringify(formData),
     };
-    let res: any = await fetch(`http://localhost:3000/api/syslog`, getOptions);
+    let res: any = await fetch(
+      `https://oktausage.vercel.app/api/syslog`,
+      getOptions
+    );
     res = await res.json();
 
     setChartData(res);
