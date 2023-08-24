@@ -1,0 +1,11 @@
+.formField {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.title {
+    font-size: 37px;
+    font-weight: bolder;
+    margin-bottom: 45px;
+}

@@ -18,10 +18,33 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px red solid; */
+  width: 60%;
+}
+
+input {
+  color: black;
+  /* width: 100%; */
+  margin: 10px;
+  padding: 15px;
+}
+
+#submit {
+  color: white;
+  border: 1px white solid;
+  margin-top: 65px;
+}
+
+#submit:hover {
+  cursor: pointer;
+  background-color: white;
+  color: black;
 }
