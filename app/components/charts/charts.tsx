@@ -144,10 +144,10 @@ export default function Charts({ chartData }: IData) {
   return (
     <div className={styles.chartContainer}>
       <p className={styles.text}>
-        # Unique Users over {num_of_days} days: {chartData.num_of_unique_users}
+        Number of Unique Users over {num_of_days} days: {chartData.num_of_unique_users}
       </p>
       <p className={styles.text}>
-        # M2M Tokens over {num_of_days} days: {chartData.num_of_m2m_tokens}
+        Number of M2M Tokens over {num_of_days} days: {chartData.num_of_m2m_tokens}
       </p>
       <button onClick={refresh} className={styles.refreshButton}>Refresh</button>
       <Bar
