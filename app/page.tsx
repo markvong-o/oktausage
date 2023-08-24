@@ -1,19 +1,29 @@
 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Charts from './components/charts/charts';
 import styles from './globals.module.css';
 
 export default function Home() {
-  const [domain, setDomain] = useState(
-    '' || (window.localStorage.getItem('domain') as string)
-  );
-  const [apiKey, setApiKey] = useState(
-    '' || (window.localStorage.getItem('apiKey') as string)
-  );
-  const [days, setDays] = useState<number>(
-    30 || parseInt(window.localStorage.getItem('keys') as string)
-  );
+  'use client';
+  const [domain, setDomain] = useState('');
+  const [apiKey, setApiKey] = useState('');
+  const [days, setDays] = useState<number>(30);
+
+  useEffect(() => {
+    let localDomain = window.localStorage.getItem('domain');
+    let localApiKey = window.localStorage.getItem('apiKey');
+    let localDays = window.localStorage.getItem('days');
+    if (localDomain) {
+      setDomain(localDomain);
+    }
+    if (localApiKey) {
+      setApiKey(localApiKey);
+    }
+    if (localDays) {
+      setDays(parseInt(localDays));
+    }
+  }, []);
   interface IChartData {
     num_of_unique_users: number;
     num_of_m2m_tokens: number;
