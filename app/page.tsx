@@ -56,7 +56,7 @@ export default function Home() {
             <input
               name="apiKey"
               id="apiKey"
-              placeholder="API Key"
+              placeholder="API Key from Security -> API -> Tokens"
               defaultValue={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
             ></input>
