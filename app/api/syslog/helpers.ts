@@ -7,7 +7,7 @@ export async function getLogData(
   filter: string,
   until?: string
 ) {
-  let url = `https://${domain}/api/v1/logs?since=${since}&until=${until}&filter=${filter}`;
+  let url = `https://${domain}/api/v1/logs?since=${since}&until=${until}&filter=${filter}&limit=1000`;
   const getOptions = {
     method: 'GET',
     headers: {
