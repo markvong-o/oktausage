@@ -9,3 +9,14 @@
     font-weight: bolder;
     margin-bottom: 45px;
 }
+
+.button {
+    color: white;
+    border: 1px white solid;
+}
+
+.button:hover {
+    cursor: pointer;
+    color: black;
+    background-color: white;
+}

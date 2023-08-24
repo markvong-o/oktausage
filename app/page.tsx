@@ -57,6 +57,11 @@ export default function Home() {
 
     setChartData(res);
   }
+
+  const clearInput = () => {
+    window.localStorage.clear();
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
       <h1 className={styles.title}>Okta Org Usage</h1>
@@ -72,6 +77,7 @@ export default function Home() {
               placeholder="Ex: company.okta.com"
               defaultValue={domain}
               onChange={(e) => setDomain(e.target.value)}
+              required
             ></input>
           </div>
           <div className={styles.formField}>
@@ -82,6 +88,7 @@ export default function Home() {
               placeholder="API Key from Security -> API -> Tokens"
               defaultValue={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
+              required
             ></input>
           </div>
           <div className={styles.formField}>
@@ -95,9 +102,17 @@ export default function Home() {
               onChange={(e) => setDays(parseInt(e.target.value))}
               min="30"
               max="90"
+              required
             ></input>
           </div>
-          <input type="submit" id="submit" name="Submit" />
+          <input type="submit" name="Submit" className={styles.button} />
+          <input
+            type="button"
+            name="Clear"
+            onClick={clearInput}
+            value="Clear"
+            className={styles.button}
+          />
         </form>
       )}
     </main>

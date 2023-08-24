@@ -48,3 +48,8 @@ input {
   background-color: white;
   color: black;
 }
+
+#clear {
+  border: 1px red solid;
+  color: white;
+}
