@@ -60,6 +60,7 @@ export default function Home() {
 
   const clearInput = () => {
     window.localStorage.clear();
+    window.location.href = "/";
   };
 
   return (
