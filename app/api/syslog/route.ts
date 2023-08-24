@@ -1,15 +1,12 @@
 import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
-import { getM2MTokens, getUniqueUsers } from './helpers';
+import { getM2MTokens, getUniqueUsers, getAllLogs } from './helpers';
 
 export async function GET(req: Request) {
   return NextResponse.json({ method: 'GET' });
 }
 
 export async function POST(req: Request) {
-  // let formData = await req.formData();
-  // let domain = formData.get('domain') as string;
-  // let apiKey = formData.get('apiKey') as string;
   let formData = await req.json();
   let domain = formData['domain'];
   let apiKey = formData['apiKey'];

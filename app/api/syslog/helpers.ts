@@ -4,10 +4,12 @@ export async function getLogData(
   domain: string,
   apiKey: string,
   since: string,
-  filter: string,
+  filter?: string,
   until?: string
 ) {
-  let url = `https://${domain}/api/v1/logs?since=${since}&until=${until}&filter=${filter}&limit=1000`;
+  let url = `https://${domain}/api/v1/logs?since=${since}&until=${until}&filter=${
+    filter ? filter : ''
+  }&limit=1000`;
   const getOptions = {
     method: 'GET',
     headers: {
@@ -20,6 +22,7 @@ export async function getLogData(
   let logs: any[] = [];
   let res: any | any[] = await fetch(url, getOptions);
   if (res.status === 401) {
+    console.log(res);
     throw new Error(`${res.statusText}! Check your API Token`);
   }
   let headers = res.headers;
@@ -36,6 +39,7 @@ export async function getLogData(
     counter += 1;
 
     res = await fetch(nextLink!, getOptions);
+    // console.log(res);
     headers = res.headers;
     res = await res.json();
     if (res.length === 0) {
@@ -55,6 +59,7 @@ export async function getLogData(
     }
     nextLink = parsedLinks?.next?.url;
   }
+  console.log('exit', logs.length);
   return logs;
 }
 
@@ -62,7 +67,7 @@ export async function getLogData(
 export async function getLogs(
   domain: string,
   apiKey: string,
-  filter: string,
+  filter?: string,
   days?: number
 ) {
   let now = new Date();
@@ -117,6 +122,24 @@ export async function getM2MTokens(
       domain,
       apiKey,
       filter,
+      days
+    )) as unknown as any[];
+    return logs.length;
+  } catch (e) {
+    throw e;
+  }
+}
+
+export async function getAllLogs(
+  domain: string,
+  apiKey: string,
+  days?: number
+) {
+  try {
+    let logs: any[] = (await getLogs(
+      domain,
+      apiKey,
+      undefined,
       days
     )) as unknown as any[];
     return logs.length;
