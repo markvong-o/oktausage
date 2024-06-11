@@ -90,6 +90,15 @@ export default function Home() {
         >
           More Info on our system log API to customize your own reporting.
         </a>
+        <br />
+        <br />
+        <a
+          href="https://github.com/markvong-o/oktausage"
+          target="_blank"
+          className={styles.link}
+        >
+          Link to this project's github repo.
+        </a>
       </p>
       {chartData ? (
         <>
