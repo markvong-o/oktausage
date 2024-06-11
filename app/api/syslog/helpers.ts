@@ -98,10 +98,20 @@ export async function getUniqueUsers(
       days
     )) as unknown as any[];
 
-    let actorIds = logs
-      .map((log) => log.target)
-      .map((targets) => targets[0])
-      .map((target) => target.id);
+    let actors = logs
+      .map((log) => {
+        console.log(log);
+        return [...log.target, log.actor];
+      })
+      .map((targets) => {
+        targets = targets.filter((k: { type: any }) => k.type === "User");
+        return targets[0];
+      })
+      .map((target) => {
+        return { id: target.id, email: target.alternateId };
+      });
+
+    let actorIds = actors.map((actor) => actor.id);
 
     let uniqueActorIds = new Set(actorIds);
 
