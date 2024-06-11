@@ -97,7 +97,7 @@ export default function Home() {
           target="_blank"
           className={styles.link}
         >
-          Link to this project's github repo.
+          Link to this project github repo.
         </a>
       </p>
       {chartData ? (
