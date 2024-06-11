@@ -162,18 +162,20 @@ export default function Charts({ chartData }: IData) {
           data={userData}
           className={styles.barContainer}
         />
-        <ul>
+        <div>
           <h3
             style={{ color: "rgba(255, 99, 132, 0.5)", fontWeight: "bolder" }}
           >
             Unique User IDs
           </h3>
-          {chartData.unique_user_ids.map((id) => (
-            <li key={id} style={{ fontSize: "11px", overflow: "scroll" }}>
-              {id}
-            </li>
-          ))}
-        </ul>
+          <ul className={styles.uniqueIdList}>
+            {chartData.unique_user_ids.map((id) => (
+              <li key={id} style={{ fontSize: "11px" }}>
+                {id}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
       <Bar
         options={tokenOptions}
