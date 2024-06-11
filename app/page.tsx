@@ -26,6 +26,7 @@ export default function Home() {
   }, []);
   interface IChartData {
     num_of_unique_users: number;
+    unique_user_ids: [];
     num_of_m2m_tokens: number;
     num_of_days: number;
   }
@@ -91,7 +92,9 @@ export default function Home() {
         </a>
       </p>
       {chartData ? (
-        <Charts chartData={chartData} />
+        <>
+          <Charts chartData={chartData} />
+        </>
       ) : (
         <form onSubmit={(e) => getSysLog(e)} className={styles.form} id="form">
           <div className={styles.formField}>

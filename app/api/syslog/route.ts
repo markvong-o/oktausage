@@ -23,7 +23,8 @@ export async function POST(req: Request) {
     let uniqueUsers = await getUniqueUsers(domain, apiKey, days);
     let uniqueM2MTokens = await getM2MTokens(domain, apiKey, days);
     return NextResponse.json({
-      num_of_unique_users: uniqueUsers,
+      num_of_unique_users: uniqueUsers.num_of_users,
+      unique_user_ids: uniqueUsers.user_ids,
       num_of_m2m_tokens: uniqueM2MTokens,
       num_of_days: days,
     });

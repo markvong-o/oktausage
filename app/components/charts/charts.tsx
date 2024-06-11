@@ -1,6 +1,6 @@
-'use client';
-import React from 'react';
-import styles from './charts.module.css';
+"use client";
+import React from "react";
+import styles from "./charts.module.css";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,12 +9,13 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 
 interface IData {
   chartData: {
     num_of_unique_users: number;
+    unique_user_ids: [];
     num_of_m2m_tokens: number;
     num_of_days: number;
   };
@@ -29,7 +30,8 @@ export default function Charts({ chartData }: IData) {
     Legend
   );
 
-  let { num_of_unique_users, num_of_m2m_tokens, num_of_days } = chartData;
+  let { num_of_unique_users, num_of_m2m_tokens, num_of_days, unique_user_ids } =
+    chartData;
 
   const userOptions = {
     responsive: true,
@@ -55,7 +57,7 @@ export default function Charts({ chartData }: IData) {
     },
     plugins: {
       legend: {
-        position: 'top' as const,
+        position: "top" as const,
         labels: {
           font: {
             size: 23,
@@ -95,7 +97,7 @@ export default function Charts({ chartData }: IData) {
     },
     plugins: {
       legend: {
-        position: 'top' as const,
+        position: "top" as const,
         labels: {
           font: {
             size: 23,
@@ -112,10 +114,10 @@ export default function Charts({ chartData }: IData) {
     },
   };
 
-  const userLabels = ['Unique Users'];
+  const userLabels = ["Unique Users"];
   const userLabelData = [num_of_unique_users];
 
-  const m2mLabels = ['M2M Tokens'];
+  const m2mLabels = ["M2M Tokens"];
   const m2mLabelData = [num_of_m2m_tokens];
 
   const userData = {
@@ -124,7 +126,7 @@ export default function Charts({ chartData }: IData) {
       {
         label: `Unique Users`,
         data: userLabelData,
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
     ],
   };
@@ -134,27 +136,41 @@ export default function Charts({ chartData }: IData) {
       {
         label: `M2M Tokens`,
         data: m2mLabelData,
-        backgroundColor: 'rgba(255, 155, 255, 1)',
+        backgroundColor: "rgba(255, 155, 255, 1)",
       },
     ],
   };
   const refresh = () => {
-    window.location.href = '/';
+    window.location.href = "/";
   };
   return (
     <div className={styles.chartContainer}>
       <p className={styles.text}>
-        Number of Unique Users over {num_of_days} days: {chartData.num_of_unique_users}
+        Number of Unique Users over {num_of_days} days:{" "}
+        {chartData.num_of_unique_users}
       </p>
       <p className={styles.text}>
-        Number of M2M Tokens over {num_of_days} days: {chartData.num_of_m2m_tokens}
+        Number of M2M Tokens over {num_of_days} days:{" "}
+        {chartData.num_of_m2m_tokens}
       </p>
-      <button onClick={refresh} className={styles.refreshButton}>Refresh</button>
-      <Bar
-        options={userOptions}
-        data={userData}
-        className={styles.barContainer}
-      />
+      <button onClick={refresh} className={styles.refreshButton}>
+        Refresh
+      </button>
+      <div style={{ display: "flex", height: "90%", width: "90%" }}>
+        <Bar
+          options={userOptions}
+          data={userData}
+          className={styles.barContainer}
+        />
+        <ul>
+          <h3 style={{ color: "rgba(255, 99, 132, 0.5)", fontWeight: "bolder" }}>
+            Unique User IDs
+          </h3>
+          {chartData.unique_user_ids.map((id) => (
+            <li style={{ fontSize: "11px", overflow: "scroll" }}>{id}</li>
+          ))}
+        </ul>
+      </div>
       <Bar
         options={tokenOptions}
         data={m2mData}

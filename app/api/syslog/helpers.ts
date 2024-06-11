@@ -115,7 +115,10 @@ export async function getUniqueUsers(
 
     let uniqueActorIds = new Set(actorIds);
 
-    return uniqueActorIds.size;
+    return {
+      num_of_users: uniqueActorIds.size,
+      user_ids: Array.from(uniqueActorIds),
+    };
   } catch (e) {
     throw e;
   }
