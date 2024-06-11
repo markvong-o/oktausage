@@ -1,19 +1,19 @@
-'use client';
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import Charts from './components/charts/charts';
-import styles from './globals.module.css';
+"use client";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import Charts from "./components/charts/charts";
+import styles from "./globals.module.css";
 
 export default function Home() {
-  'use client';
-  const [domain, setDomain] = useState('');
-  const [apiKey, setApiKey] = useState('');
+  "use client";
+  const [domain, setDomain] = useState("");
+  const [apiKey, setApiKey] = useState("");
   const [days, setDays] = useState<number>(30);
 
   useEffect(() => {
-    let localDomain = window.localStorage.getItem('domain');
-    let localApiKey = window.localStorage.getItem('apiKey');
-    let localDays = window.localStorage.getItem('days');
+    let localDomain = window.localStorage.getItem("domain");
+    let localApiKey = window.localStorage.getItem("apiKey");
+    let localDays = window.localStorage.getItem("days");
     if (localDomain) {
       setDomain(localDomain);
     }
@@ -31,9 +31,9 @@ export default function Home() {
   }
   const [chartData, setChartData] = useState<IChartData | null>(null);
   async function getSysLog(e: any) {
-    window.localStorage.setItem('domain', domain as string);
-    window.localStorage.setItem('apiKey', apiKey as string);
-    window.localStorage.setItem('days', days.toString());
+    window.localStorage.setItem("domain", domain as string);
+    window.localStorage.setItem("apiKey", apiKey as string);
+    window.localStorage.setItem("days", days.toString());
     e.preventDefault();
     let formData = {
       domain,
@@ -41,10 +41,10 @@ export default function Home() {
       days,
     };
     const getOptions = {
-      method: 'POST',
+      method: "POST",
       headers: {
         Authorization: `SSWS ${apiKey}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     };
@@ -53,7 +53,8 @@ export default function Home() {
       getOptions
     );
     if (res.status !== 200) {
-      alert(`ERROR: Make sure your API Token is valid.`);
+      const error = await res.json();
+      alert(`ERROR: ${error.Error}`);
       return;
     }
     res = await res.json();
@@ -63,7 +64,7 @@ export default function Home() {
 
   const clearInput = () => {
     window.localStorage.clear();
-    window.location.href = '/';
+    window.location.href = "/";
   };
 
   return (
@@ -72,7 +73,7 @@ export default function Home() {
       <p className={styles.description}>
         A tool built to help visualize usage for an Okta org, specifically
         targeting the number of unique user logins and M2M tokens minted between
-        the last 30 - 90 days.{' '}
+        the last 30 - 90 days.{" "}
         <span className={styles.boldText}>
           <br />
           <br />

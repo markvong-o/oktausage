@@ -24,6 +24,10 @@ export async function getLogData(
   if (res.status === 401) {
     throw new Error(`${res.statusText}! Check your API Token`);
   }
+  if(res.status === 400) {
+    res = await res.json();
+    throw new Error(`${res.errorSummary}`);
+  }
   let headers = res.headers;
   res = await res.json();
   logs.push(...res);
@@ -84,7 +88,10 @@ export async function getUniqueUsers(
   apiKey: string,
   days?: number
 ) {
-  let filter: string = `eventType eq "app.oauth2.token.grant.id_token" and outcome.result eq "SUCCESS"`;
+  // let filter: string = `eventType eq "app.oauth2.token.grant.id_token" and outcome.result eq "SUCCESS"`;
+  let filter: string = `eventType eq eventType eq "user.authentication.sso" or eventType eq "user.session.start" or eventType eq "app.oauth2.as.authorize.implicit.id_token" or eventType eq "app.oauth2.as.token.grant.id_token" or eventType eq "app.oauth2.as.token.grant.refresh_token" or eventType eq "app.oauth2.authorize.implicit.id_token" or eventType eq "app.oauth2.authorize.implicit.access_token" or eventType eq "app.oauth2.token.grant.access_token" or eventType eq "app.oauth2.token.grant.id_token" or eventType eq "app.oauth2.token.grant.refresh_token" or eventType eq "app.oauth2.as.authorize.implicit.access_token" or eventType eq "app.oauth2.as.token.grant.access_token") and
+  outcome.result eq "SUCCESS" and (debugContext.debugData.grantType ne "client_credentials" or debugContext.debugData.grantType eq NULL`;
+
   try {
     let logs: any[] = (await getLogs(
       domain,
