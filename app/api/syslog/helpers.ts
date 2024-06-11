@@ -100,8 +100,7 @@ export async function getUniqueUsers(
 
     let actors = logs
       .map((log) => {
-        console.log(log);
-        return [...log.target, log.actor];
+        return [...log.target || '', log.actor];
       })
       .map((targets) => {
         targets = targets.filter((k: { type: any }) => k.type === "User");
