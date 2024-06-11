@@ -163,11 +163,15 @@ export default function Charts({ chartData }: IData) {
           className={styles.barContainer}
         />
         <ul>
-          <h3 style={{ color: "rgba(255, 99, 132, 0.5)", fontWeight: "bolder" }}>
+          <h3
+            style={{ color: "rgba(255, 99, 132, 0.5)", fontWeight: "bolder" }}
+          >
             Unique User IDs
           </h3>
           {chartData.unique_user_ids.map((id) => (
-            <li style={{ fontSize: "11px", overflow: "scroll" }}>{id}</li>
+            <li key={id} style={{ fontSize: "11px", overflow: "scroll" }}>
+              {id}
+            </li>
           ))}
         </ul>
       </div>
